@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="auction_bid_view_form" model="ir.ui.view">
+        <field name="name">auction.bid.view.form</field>
+        <field name="model">auction.bid</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="auction_id"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="auction_bid_view_tree" model="ir.ui.view">
+        <field name="name">auction.bid.view.tree</field>
+        <field name="model">auction.bid</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="user_id"></field>
+                <field name="auction_id"></field>
+                <field name="amount"></field>
+                <field name="date"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="auction_bid_action" model="ir.actions.act_window">
+        <field name="name">Licitaciones</field>
+        <field name="res_model">auction.bid</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

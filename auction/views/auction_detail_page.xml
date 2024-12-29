@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="auction_detail_page" name="Auction Detail Page">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                    <div class="container">
+                        <h2 t-esc="auction.name"/>
+                        <div id="auction-details">
+                            <p>Producto: <span t-esc="auction.product_id.name"/></p>
+                            <p>Estado: <span t-esc="auction.state"/></p>
+                            <p>Precio Inicial: <span t-esc="auction.sale_price"/></p>
+                            <p>Precio Actual: <span t-esc="auction.current_price"/></p>
+                            <p>Ganador: <span t-esc="auction.winner_id"/></p>
+                            <p>Fecha de Inicio: <span t-esc="auction.start_date"/></p>
+                            <p>Fecha de Cierre: <span t-esc="auction.end_date"/></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

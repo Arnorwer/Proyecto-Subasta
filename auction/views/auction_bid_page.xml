@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="auction_bid_page" name="Auction Bid Page">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                    <div class="container">
+                        <h2>Pujar por Producto</h2>
+                        <div id="auction-product-details" t-att-data-product-id="auction.id">
+                            <h3 t-esc="auction.name"/>
+                            <p>Producto: <span t-esc="auction.product_id.name"/></p>
+                            <p>Precio Inicial: <span t-esc="auction.sale_price"/></p>
+                            <p>Precio Actual: <span t-esc="auction.current_price"/></p>
+                            <form id="bid-form">
+                                <div class="form-group">
+                                    <label for="user-id">Nombre del Usuario:</label>
+                                    <select id="user-id" class="form-control">
+                                        <t t-foreach="users" t-as="user">
+                                            <option t-att-value="user.id"><t t-esc="user.name"/></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label for="bid-amount">Monto de la Puja:</label>
+                                    <input type="number" id="bid-amount" class="form-control" placeholder="Ingrese su puja"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Enviar Puja</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>
