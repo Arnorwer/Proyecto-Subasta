@@ -11,7 +11,9 @@
                             <p>Estado: <span t-esc="auction.state"/></p>
                             <p>Precio Inicial: <span t-esc="auction.sale_price"/></p>
                             <p>Precio Actual: <span t-esc="auction.current_price"/></p>
-                            <p>Ganador: <span t-esc="auction.winner_id"/></p>
+                            <t t-if="auction.state == 'terminada'">
+                                <p>Ganador: <span t-esc="auction.winner_id.name"/></p>
+                            </t>
                             <p>Fecha de Inicio: <span t-esc="auction.start_date"/></p>
                             <p>Fecha de Cierre: <span t-esc="auction.end_date"/></p>
                         </div>
