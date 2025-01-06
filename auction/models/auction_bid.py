@@ -19,7 +19,9 @@ class AuctionBid(models.Model):
                 raise ValidationError("Solo se pueden hacer pujas en subastas activas.")
             if vals['amount'] <= auction.sale_price or vals['amount'] <= auction.current_price:
                 raise ValidationError("El monto de la puja debe ser mayor al precio inicial o precio actual de la subasta.")
-        return super(AuctionBid, self).create(vals)
+        result = super(AuctionBid, self).create(vals)
+        auction.write({'current_price' : vals['amount']})
+        return result
 
     def write(self, vals):
         for record in self:

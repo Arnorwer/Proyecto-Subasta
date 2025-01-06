@@ -8,7 +8,10 @@ class AuctionWebsite(http.Controller):
 
     @http.route('/auctions', type='http', auth='public', website=True)
     def auctions(self, **kwargs):
-        auctions = request.env['auction.register'].sudo().search([])
+        auctions = request.env['auction.register'].sudo().search(
+            [('state', '=', 'en proceso')],
+            order = 'end_date desc'
+            )
         return request.render('auction.auction_page', {
             'auctions': auctions,
         })
@@ -35,21 +38,22 @@ class AuctionWebsite(http.Controller):
             if not auction:
                 _logger.error('Auction not found.')
                 return {'success': False, 'message': 'Subasta no encontrada.'}
-        
+
             if bid_amount <= auction.current_price:
                 _logger.error('Bid amount is not greater than the current price.')
                 return {'success': False, 'message': 'El monto de la puja debe ser mayor al precio actual.'}
-        
+
             request.env['auction.bid'].sudo().create({
                 'user_id': user_id,
                 'auction_id': auction.id,
                 'amount': bid_amount,
             })
-        
+
             auction.sudo().write({'current_price': bid_amount})
 
             _logger.info('Bid successfully submitted.')
             return {'success': True, 'message': 'Puja realizada con éxito.'}
-        except Exception as e: 
-            _logger.error(f'Error while submitting bid: {str(e)}') 
+        except Exception as e:
+            _logger.error(f'Error while submitting bid: {str(e)}')
             return {'success': False, 'message': f'Error: {str(e)}'}
+

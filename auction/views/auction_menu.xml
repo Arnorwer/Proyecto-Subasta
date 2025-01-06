@@ -6,12 +6,6 @@
         action="auction.auction_register_action"
         sequence="1"/>
     <menuitem
-        id="auction_product_menu"
-        name="Productos"
-        action="auction.auction_product_action"
-        parent="auction_root_menu"
-        sequence="2"/>
-    <menuitem
         id="auction_bid_menu"
         name="Licitaciones"
         action="auction.auction_bid_action"

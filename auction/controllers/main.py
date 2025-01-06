@@ -8,8 +8,4 @@ class Main(http.Controller):
 
         return request.render(
             'auction.sign_in',
-
         )
-
-
-

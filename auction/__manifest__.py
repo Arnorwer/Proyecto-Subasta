@@ -12,8 +12,9 @@
     'data': [
         'security/ir.model.access.csv',
         'data/res_partner_data.xml',
+        'data/auction_cron.xml',
+        'views/res_partner_views.xml',
         'views/auction_register_views.xml',
-        'views/auction_product_views.xml',
         'views/auction_bid_views.xml',
         'views/sign_in.xml',
         'views/auction_page.xml', 

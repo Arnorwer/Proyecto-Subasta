@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="form-group" style="margin-top: 20px;">
                                     <label for="bid-amount">Monto de la Puja:</label>
-                                    <input type="number" id="bid-amount" class="form-control" placeholder="Ingrese su puja"/>
+                                    <input type="text" id="bid-amount" class="oe_input" placeholder="Ingrese su puja"/>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Enviar Puja</button>
                             </form>
@@ -33,3 +33,4 @@
         </t>
     </template>
 </odoo>
+

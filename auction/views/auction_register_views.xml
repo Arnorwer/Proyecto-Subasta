@@ -34,6 +34,7 @@
                 <field name="name"></field>
                 <field name="product_id"></field>
                 <field name="state"></field>
+                <field name="sale_price"></field>
                 <field name="current_price"></field>
                 <field name="winner_id" attrs="{'invisible': [('state', '!=', 'terminada')]}"/>
             </tree>
@@ -67,9 +68,14 @@
                                     <span>Estado: <field name="state"/></span>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span>Precio Inicial: <field name="sale_price"/></span>
+                                </div>
+                            </div>
                              <div class="row">
                                 <div class="col-12">
-                                    <span>Precio de Venta: <field name="current_price"/></span>
+                                    <span>Precio Actual: <field name="current_price"/></span>
                                 </div>
                             </div>
                             <div class="row">

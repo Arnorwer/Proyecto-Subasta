@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <!-- Vista heredada de res.partner -->
+        <record id="view_res_partner_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button 
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_auction_won"
+                        icon="fa-gavel"
+                        context="{'default_winner_id': active_id}">
+                        <field string="Subastas Ganadas" name="auction_won_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la vista de subastas ganadas -->
+        <record id="action_auction_won" model="ir.actions.act_window">
+            <field name="name">Subastas Ganadas</field>
+            <field name="res_model">auction.register</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('winner_id', '=', active_id)]</field>
+        </record>
+    </data>
+</odoo>
+

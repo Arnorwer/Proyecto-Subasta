@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class AuctionRegister(models.Model):
     _name = 'auction.register'
@@ -9,7 +12,7 @@ class AuctionRegister(models.Model):
     product_id = fields.Many2one('product.product', 'Producto')
     start_date = fields.Date('Fecha de Inicio')
     end_date = fields.Date('Fecha de Cierre')
-    sale_price = fields.Float('Precio Inicial', related='product_id.lst_price')
+    sale_price = fields.Float(related='product_id.lst_price', string='Precio Inicial', store=True, readonly=False)
     current_price = fields.Float('Precio Actual', compute='_compute_current_price')
     state = fields.Selection([
         ('borrador', 'Borrador'),
@@ -23,7 +26,7 @@ class AuctionRegister(models.Model):
     @api.depends('bid_ids')
     def _compute_current_price(self):
         for record in self:
-            record.current_price = max(record.mapped('bid_ids.amount') or [record.current_price])
+            record.current_price = max(record.mapped('bid_ids.amount') or [record.sale_price])
     
     def write(self, vals): 
         res = super(AuctionRegister, self).write(vals) 
@@ -33,3 +36,11 @@ class AuctionRegister(models.Model):
                 if highest_bid: 
                     record.winner_id = highest_bid.user_id 
         return res 
+    
+    @api.model 
+    def _cron_close_expired_auctions(self): 
+        _logger.info('Running cron job to close expired auctions.') 
+        expired_auctions = self.search([('end_date', '<', fields.Datetime.now()), ('state', '=', 'en proceso')]) 
+        for auction in expired_auctions: 
+            auction.write({'state': 'terminada'}) 
+            _logger.info(f'Auction {auction.name} terminada.')
